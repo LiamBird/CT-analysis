@@ -355,6 +355,7 @@ class LabelAnalysis(object):
         Deletes particles whose centroid is within one equivalent diameter of a boundary.
         Can be undone using 'undo_borderkill' to restore original data to self.df
         """
+        import pandas as pd
         from copy import deepcopy
         setattr(self, "_df_original", self.df)
         setattr(self, "df", self.df.loc[pd.concat([abs(self.df["BaryCenter{}".format(str.capitalize(coord))]
