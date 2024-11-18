@@ -357,8 +357,8 @@ class LabelAnalysis(object):
         """
         from copy import deepcopy
         setattr(self, "_df_original", self.df)
-        setattr(self, "df", df.loc[pd.concat([abs(df["BaryCenter{}".format(str.capitalize(coord))]
-                                     -vars(self.extent)["{}_{}".format(coord, dimension)])>df["EqDiameter"] 
+        setattr(self, "df", self.df.loc[pd.concat([abs(self.df["BaryCenter{}".format(str.capitalize(coord))]
+                                     -vars(self.extent)["{}_{}".format(coord, dimension)])>self.df["EqDiameter"] 
                                  for coord in ["x", "y", "z"] for dimension in ["min", "max"]], axis=1).all(1)])
         
     def undo_borderkill(self):
