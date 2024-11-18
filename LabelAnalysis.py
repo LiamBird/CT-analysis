@@ -33,8 +33,6 @@ class LabelAnalysis(object):
         import pandas as pd
         import numpy as np
         import matplotlib.pyplot as plt
-
-        self._version = "06/09/2024"
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
