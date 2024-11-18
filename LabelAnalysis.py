@@ -348,3 +348,22 @@ class LabelAnalysis(object):
                 eq_diams[hi, wi] = np.array(subvols[hi, wi]["EqDiameter"])
                 
         return eq_diams, nearest_neighbours
+
+    def borderkill(self):
+        """
+        Function to remove partial particles from volume and leave only particles fully within volume (approximates)
+        Deletes particles whose centroid is within one equivalent diameter of a boundary.
+        Can be undone using 'undo_borderkill' to restore original data to self.df
+        """
+        from copy import deepcopy
+        setattr(self, "_df_original", self.df)
+        setattr(self, "df", df.loc[pd.concat([abs(df["BaryCenter{}".format(str.capitalize(coord))]
+                                     -vars(self.extent)["{}_{}".format(coord, dimension)])>df["EqDiameter"] 
+                                 for coord in ["x", "y", "z"] for dimension in ["min", "max"]], axis=1).all(1)])
+        
+    def undo_borderkill(self):
+        if "_df_original" in vars(self):
+            setattr(self, "df", self._df_original)
+            print("Recovered original data")
+        else:
+            print("No border kill applied, no changes made")
