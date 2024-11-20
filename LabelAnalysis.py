@@ -313,7 +313,7 @@ class LabelAnalysis(object):
         
         
         if fast_grid == False:
-            return self.df["EqDiameter"], find_min_distance(self.df)
+            return self.df["EqDiameter"].to_numpy(), np.array(find_min_distance(self.df))
 
         else:
             lateral_dimensions = self._lateral_dimensions
@@ -350,7 +350,7 @@ class LabelAnalysis(object):
                 nearest_neighbours[hi, wi] = nearest_neighbour_dist
                 eq_diams[hi, wi] = np.array(subvols[hi, wi]["EqDiameter"])
                 
-        return eq_diams, nearest_neighbours
+        return np.hstack((eq_diams.flatten())), np.hstack((nearest_neighbours.flatten()))
 
     def borderkill(self):
         """
