@@ -310,7 +310,7 @@ class LabelAnalysis(object):
         
         
         if fast_grid == False:
-            return df["EqDiameter"], find_min_distance(self.df)
+            return self.df["EqDiameter"], find_min_distance(self.df)
 
         else:
             lateral_dimensions = self._lateral_dimensions
