@@ -33,6 +33,9 @@ class LabelAnalysis(object):
         import pandas as pd
         import numpy as np
         import matplotlib.pyplot as plt
+
+        self._version = "20.11.2024"
+        self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)"]
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
