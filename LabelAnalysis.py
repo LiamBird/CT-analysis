@@ -36,7 +36,7 @@ class LabelAnalysis(object):
 
         self._version = "21.11.2024"
         self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)",
-                     "21.11.2024: added select_percentile_range function"]
+                     "21.11.2024: added select_percentile_range function, added sieve_by_sphericity function"]
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
@@ -391,3 +391,15 @@ class LabelAnalysis(object):
             setattr(self, "df", percentile_df)
         else:
             setattr(self, "percentile_df", percentile_df)
+
+    def sieve_sphericity(self, max_value=1, min_value=0, replace=True):
+        if "_all_sphericity" in vars(self):
+            setattr(self, "df", deepcopy(self._all_sphericity))
+        
+        in_range = self.df.loc[(self.df["sphericity"] > min_value) & (self.df["sphericity"]< max_value)]
+        if replace==True:
+            from copy import deepcopy
+            setattr(self, "_all_sphericity", deepcopy(self.df))
+            setattr(self, "df", in_range)
+        else:
+            setattr(self, "select_sphericity", in_range)
