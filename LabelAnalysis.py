@@ -34,8 +34,9 @@ class LabelAnalysis(object):
         import numpy as np
         import matplotlib.pyplot as plt
 
-        self._version = "20.11.2024"
-        self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)"]
+        self._version = "21.11.2024"
+        self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)",
+                     "21.11.2024: added select_percentile_range function"]
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
@@ -371,3 +372,19 @@ class LabelAnalysis(object):
             print("Recovered original data")
         else:
             print("No border kill applied, no changes made")
+
+    def select_percentile_range(self, percentile=90, sort_on="Volume3d", replace_df=True):
+        if "_full_df" in vars(self):
+            setattr(self, "df", self._full_df)
+            print("using full range")
+        
+        idx_to_keep = int(len(self.df)*percentile/100)
+        mid_point = int(len(self.df)/2)
+        percentile_df = self.df.iloc[np.argsort(self.df[sort_on].to_numpy())[mid_point-int(idx_to_keep/2):\
+                                                                             mid_point+int(idx_to_keep/2)]]
+        if replace_df == True:
+            from copy import deepcopy
+            setattr(self, "_full_df", deepcopy(self.df))
+            setattr(self, "df", percentile_df)
+        else:
+            setattr(self, "percentile_df", percentile_df)
