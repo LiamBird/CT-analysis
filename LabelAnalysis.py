@@ -374,6 +374,9 @@ class LabelAnalysis(object):
             print("No border kill applied, no changes made")
 
     def select_percentile_range(self, percentile=90, sort_on="Volume3d", replace_df=True):
+        import numpy as np
+        import pandas as pd
+        
         if "_full_df" in vars(self):
             setattr(self, "df", self._full_df)
             print("using full range")
