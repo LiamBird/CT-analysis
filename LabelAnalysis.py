@@ -393,6 +393,7 @@ class LabelAnalysis(object):
             setattr(self, "percentile_df", percentile_df)
 
     def sieve_sphericity(self, max_value=1, min_value=0, replace=True):
+        from copy import deepcopy
         if "_all_sphericity" in vars(self):
             setattr(self, "df", deepcopy(self._all_sphericity))
         
