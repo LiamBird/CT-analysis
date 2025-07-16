@@ -1,5 +1,5 @@
 class LabelAnalysis(object):  
-    def __init__(self, fname):
+    def __init__(self, fname, remove_blanks="Volume3d"):
         """
         Load and analyse label analysis data output from Avizo. Uses 'Label analysis' output including headers: 
         BaryCenterX, BaryCenterY, BaryCenterZ, Volume3d, EqDiameter (with or without units and trailing spaces)
@@ -36,10 +36,14 @@ class LabelAnalysis(object):
 
         self._version = "21.11.2024"
         self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)",
-                     "21.11.2024: added select_percentile_range function, added sieve_by_sphericity function"]
+                     "21.11.2024: added select_percentile_range function, added sieve_by_sphericity function",
+                     "14.07.2025: added remove_blanks option"]
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
+
+        if remove_blanks != False:
+            self.df = self.df.loc[~(self.df[remove_blanks]==0)]
         
         class Extent(object):
             def __init__(extent_self):
