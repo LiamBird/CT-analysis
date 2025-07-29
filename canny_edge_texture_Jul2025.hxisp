@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Workflow name="Workflow">
+  <WorkflowStepsList>
+    <Step uid="{003f3679-d940-45f7-b166-206de86331a9}">
+      <CommonInfo productName="" productVersion="2023.2"/>
+      <ToolInfo action="INPUT_STEP"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="" comment="" paused="0" areVolatile="0" outputName=""/>
+    </Step>
+    <Step uid="{cf19e071-fdca-425a-ba8e-d5f19405efdc}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Object(4)" resourceKey="HxISPReferenceModule" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Reference" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxISPReferenceModule &quot;Object(4)&quot;&#xa;&quot;Object(4)&quot; setIconPosition 0 0&#xa;&quot;Object(4)&quot; fire&#xa;&quot;Object(4)&quot; applyTransformToResult 1&#xa;&quot;Object(4)&quot; fire&#xa;&quot;Object(4)&quot; setViewerMask 16383&#xa;&quot;Object(4)&quot; setPickable 1&#xa;&quot;Object(4)&quot; data connect data-2&#xa;&quot;Object(4)&quot; reference connect reference-2&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput="reference"/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{003f3679-d940-45f7-b166-206de86331a9}"/>
+        <Connection resultSlot="-2" name="reference" uid="{003f3679-d940-45f7-b166-206de86331a9}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+      </Results>
+    </Step>
+    <Step uid="{43874728-666d-44f7-92b4-56bca242d39a}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Canny Edge Detector(2)" resourceKey="HxCanny2D" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Canny Edge Detector" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxCanny2D &quot;Canny Edge Detector(2)&quot;&#xa;&quot;Canny Edge Detector(2)&quot; setVar &quot;CustomHelp&quot; {HxCanny2D}&#xa;&quot;Canny Edge Detector(2)&quot; setVar &quot;CustomXML&quot; {HxCanny2D_config.xml}&#xa;&quot;Canny Edge Detector(2)&quot; data connect &quot;0_Data_image_to_seg(2)&quot;&#xa;&quot;Canny Edge Detector(2)&quot; fire&#xa;&quot;Canny Edge Detector(2)&quot; sigma setValue 0 1&#xa;&quot;Canny Edge Detector(2)&quot; sigma setValue 1 1&#xa;&quot;Canny Edge Detector(2)&quot; kernelSize setValue 0 5&#xa;&quot;Canny Edge Detector(2)&quot; kernelSize setValue 1 5&#xa;&quot;Canny Edge Detector(2)&quot; suppressionRange setValue 0 7&#xa;&quot;Canny Edge Detector(2)&quot; connectEdgesMask setValue 0 3&#xa;&quot;Canny Edge Detector(2)&quot; connectEdgesThresh setValue 0 4000&#xa;&quot;Canny Edge Detector(2)&quot; connectEdgesThresh setValue 1 1&#xa;&quot;Canny Edge Detector(2)&quot; applyTransformToResult 1&#xa;&quot;Canny Edge Detector(2)&quot; fire&#xa;&quot;Canny Edge Detector(2)&quot; setViewerMask 16383&#xa;&quot;Canny Edge Detector(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{cf19e071-fdca-425a-ba8e-d5f19405efdc}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts>
+        <displayedPort label="Canny Edges Connect Threshold" defaultLabel="Connect Edges Threshold" name="connectEdgesThresh"/>
+      </displayedPorts>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{3bbd1b79-d208-4d60-b2c8-933d51e888a8}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Reference Change(2)" resourceKey="HxISPReferenceModule" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Reference Change" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxISPReferenceModule &quot;Reference Change(2)&quot;&#xa;&quot;Reference Change(2)&quot; setIconPosition 0 0&#xa;&quot;Reference Change(2)&quot; setVar &quot;CustomHelp&quot; {HxISPReferenceModule}&#xa;&quot;Reference Change(2)&quot; data connect &quot;2_CannyEdgeDetector&quot;&#xa;&quot;Reference Change(2)&quot; fire&#xa;&quot;Reference Change(2)&quot; applyTransformToResult 1&#xa;&quot;Reference Change(2)&quot; fire&#xa;&quot;Reference Change(2)&quot; setViewerMask 16383&#xa;&quot;Reference Change(2)&quot; setPickable 1&#xa;&#xa;&quot;Reference Change(2)&quot; reference connect reference-1" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput="reference"/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{43874728-666d-44f7-92b4-56bca242d39a}"/>
+        <Connection resultSlot="-1" name="reference" uid="{003f3679-d940-45f7-b166-206de86331a9}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+      </Results>
+    </Step>
+    <Step uid="{b7fe21ca-7224-4760-ab46-29f767c4748f}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Mask(2)" resourceKey="mask" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Mask" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create mask &quot;Mask(2)&quot;&#xa;&quot;Mask(2)&quot; setVar &quot;CustomHelp&quot; {mask.html}&#xa;&quot;Mask(2)&quot; setVar &quot;CustomXML&quot; {mask_config.xml}&#xa;&quot;Mask(2)&quot; interpretation setValue 0&#xa;&quot;Mask(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Mask(2)&quot; inputImage connect &quot;0_Data_image_to_seg(2)&quot;&#xa;&quot;Mask(2)&quot; inputBinaryImage connect &quot;2_CannyEdgeDetector&quot;&#xa;&quot;Mask(2)&quot; applyTransformToResult 1&#xa;&quot;Mask(2)&quot; fire&#xa;&quot;Mask(2)&quot; setViewerMask 16383&#xa;&quot;Mask(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="0" name="inputBinaryImage" uid="{43874728-666d-44f7-92b4-56bca242d39a}"/>
+        <Connection resultSlot="-2" name="inputImage" uid="{3bbd1b79-d208-4d60-b2c8-933d51e888a8}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{11d50618-3bd3-43c5-b0bc-6bafc96c83a5}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Threshold by Criterion" resourceKey="threshold_criterion" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Threshold by Criterion" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create threshold_criterion &quot;Threshold by Criterion&quot;&#xa;&quot;Threshold by Criterion&quot; setIconPosition 800 247&#xa;&quot;Threshold by Criterion&quot; setVar &quot;CustomHelp&quot; {threshold_criterion.html}&#xa;&quot;Threshold by Criterion&quot; interpretation setValue 0&#xa;&quot;Threshold by Criterion&quot; outputLocation setIndex 0 0&#xa;&quot;Threshold by Criterion&quot; inputImage connect &quot;4_Mask&quot;&#xa;&quot;Threshold by Criterion&quot; criterion setIndex 0 5&#xa;&quot;Threshold by Criterion&quot; value setMinMax 0 -3.40282346638529e+38 3.40282346638529e+38&#xa;&quot;Threshold by Criterion&quot; value setValue 0 0&#xa;&quot;Threshold by Criterion&quot; applyTransformToResult 1&#xa;&quot;Threshold by Criterion&quot; fire&#xa;&quot;Threshold by Criterion&quot; setViewerMask 16383&#xa;&quot;Threshold by Criterion&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputImage" uid="{b7fe21ca-7224-4760-ab46-29f767c4748f}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{f8ff1298-5cc1-412b-960c-43261ca4ec9b}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Random-Walk Distance Map(2)" resourceKey="HxRandomWalkDistanceMap" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Random-Walk Distance Map" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxRandomWalkDistanceMap &quot;Random-Walk Distance Map(2)&quot;&#xa;&quot;Random-Walk Distance Map(2)&quot; setIconPosition 800 247&#xa;&quot;Random-Walk Distance Map(2)&quot; setVar &quot;CustomHelp&quot; {HxRandomWalkDistanceMap}&#xa;&quot;Random-Walk Distance Map(2)&quot; data connect &quot;5_ThresholdbyCriterion&quot;&#xa;&quot;Random-Walk Distance Map(2)&quot; fire&#xa;&quot;Random-Walk Distance Map(2)&quot; boundaryCondition setValue 0&#xa;&quot;Random-Walk Distance Map(2)&quot; paddingValue setMinMax 0 -1 1&#xa;&quot;Random-Walk Distance Map(2)&quot; paddingValue setValue 0 0&#xa;&quot;Random-Walk Distance Map(2)&quot; solver setValue 0&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setMinMax 0 2&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setButtons 0&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setEditButton 1&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setIncrement 0.133333&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setValue 1.5&#xa;&quot;Random-Walk Distance Map(2)&quot; relaxationFactor setSubMinMax 0 2&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setMinMax 9.99999996004197e-13 1&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setButtons 0&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setEditButton 1&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setIncrement 0.0666667&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setValue 0.001&#xa;&quot;Random-Walk Distance Map(2)&quot; tolerance setSubMinMax 9.99999996004197e-13 1&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setMinMax 1 1000000&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setButtons 1&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setEditButton 1&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setIncrement 1&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setValue 1000&#xa;&quot;Random-Walk Distance Map(2)&quot; maxIterations setSubMinMax 1 1000000&#xa;&quot;Random-Walk Distance Map(2)&quot; numberOfLevels setMinMax 0 0 16777216&#xa;&quot;Random-Walk Distance Map(2)&quot; numberOfLevels setValue 0 0&#xa;&quot;Random-Walk Distance Map(2)&quot; resampleFactor setMinMax 0 1 16777216&#xa;&quot;Random-Walk Distance Map(2)&quot; resampleFactor setValue 0 2&#xa;&quot;Random-Walk Distance Map(2)&quot; applyTransformToResult 1&#xa;&quot;Random-Walk Distance Map(2)&quot; fire&#xa;&quot;Random-Walk Distance Map(2)&quot; setViewerMask 16383&#xa;&quot;Random-Walk Distance Map(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{11d50618-3bd3-43c5-b0bc-6bafc96c83a5}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{dccd82bf-c3d0-47c5-a5b2-586b12d510a0}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="H-Extrema Watershed(2)" resourceKey="greyseparate" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="H-Extrema Watershed" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create greyseparate &quot;H-Extrema Watershed(2)&quot;&#xa;&quot;H-Extrema Watershed(2)&quot; setVar &quot;CustomHelp&quot; {greyseparate.html}&#xa;&quot;H-Extrema Watershed(2)&quot; setVar &quot;CustomXML&quot; {greyseparate_config.xml}&#xa;&quot;H-Extrema Watershed(2)&quot; interpretation setValue 0&#xa;&quot;H-Extrema Watershed(2)&quot; outputLocation setIndex 0 0&#xa;&quot;H-Extrema Watershed(2)&quot; neighborhood setValue 0&#xa;&quot;H-Extrema Watershed(2)&quot; inputGrayscaleImage connect &quot;6_Random-WalkDistanceMap&quot;&#xa;&quot;H-Extrema Watershed(2)&quot; objectType setIndex 0 1&#xa;&quot;H-Extrema Watershed(2)&quot; markerExtent setValue 0 4&#xa;&quot;H-Extrema Watershed(2)&quot; outputType setIndex 0 1&#xa;&quot;H-Extrema Watershed(2)&quot; algorithmMode setIndex 0 0&#xa;&quot;H-Extrema Watershed(2)&quot; applyTransformToResult 1&#xa;&quot;H-Extrema Watershed(2)&quot; fire&#xa;&quot;H-Extrema Watershed(2)&quot; setViewerMask 16383&#xa;&quot;H-Extrema Watershed(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputGrayscaleImage" uid="{f8ff1298-5cc1-412b-960c-43261ca4ec9b}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{d3176d7a-7885-4f81-9ba3-de65819e098e}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Invert(4)" resourceKey="negative" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Invert" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create negative &quot;Invert(4)&quot;&#xa;&quot;Invert(4)&quot; setIconPosition 800 247&#xa;&quot;Invert(4)&quot; setVar &quot;CustomHelp&quot; {negative.html}&#xa;&quot;Invert(4)&quot; interpretation setValue 0&#xa;&quot;Invert(4)&quot; outputLocation setIndex 0 0&#xa;&quot;Invert(4)&quot; inputImage connect &quot;7_H-ExtremaWatershed&quot;&#xa;&quot;Invert(4)&quot; numberOfSignificantBits setMinMax 0 0 2147483648&#xa;&quot;Invert(4)&quot; numberOfSignificantBits setValue 0 8&#xa;&quot;Invert(4)&quot; applyTransformToResult 1&#xa;&quot;Invert(4)&quot; fire&#xa;&quot;Invert(4)&quot; setViewerMask 16383&#xa;&quot;Invert(4)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputImage" uid="{dccd82bf-c3d0-47c5-a5b2-586b12d510a0}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{87f49fe0-5fed-4df5-932f-506374bf844f}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Labeling(2)" resourceKey="label" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Labeling" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create label &quot;Labeling(2)&quot;&#xa;&quot;Labeling(2)&quot; setVar &quot;CustomHelp&quot; {label.html}&#xa;&quot;Labeling(2)&quot; setVar &quot;CustomXML&quot; {label_config.xml}&#xa;&quot;Labeling(2)&quot; interpretation setValue 0&#xa;&quot;Labeling(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Labeling(2)&quot; neighborhood setValue 0&#xa;&quot;Labeling(2)&quot; inputImage connect &quot;8_Invert&quot;&#xa;&quot;Labeling(2)&quot; applyTransformToResult 1&#xa;&quot;Labeling(2)&quot; fire&#xa;&quot;Labeling(2)&quot; setViewerMask 16383&#xa;&quot;Labeling(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputImage" uid="{d3176d7a-7885-4f81-9ba3-de65819e098e}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{c06aca6f-f37a-44b8-9386-102675365e95}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Label Analysis(2)" resourceKey="HxAnalyzeLabels" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Label Analysis" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxAnalyzeLabels &quot;Label Analysis(2)&quot;&#xa;&quot;Label Analysis(2)&quot; setIconPosition 800 247&#xa;&quot;Label Analysis(2)&quot; setVar &quot;CustomHelp&quot; {HxAnalyzeLabels}&#xa;&quot;Label Analysis(2)&quot; data connect &quot;9_Labeling&quot;&#xa;&quot;Label Analysis(2)&quot; fire&#xa;&quot;Label Analysis(2)&quot; interpretation setValue 0&#xa;&quot;Label Analysis(2)&quot; sequenceMode setValue 0&#xa;labelMeasure setAttributes feret2d 0 18 36 54 72 90 108 126 144 162&#xa;labelMeasure setAttributes feret3d 31&#xa;labelMeasure setAttributes cooccurrence 0 0&#xa;labelMeasure setAttributes histogram 1 0 255 1&#xa;labelMeasure setAttributes quantile 0.1 0.1 0.1 0.1 0.1 0.1&#xa;labelMeasure setAttributes breadth3d 10&#xa;labelMeasure setAttributes neighborCount 0 5 0&#xa;&quot;Label Analysis(2)&quot; measures setState {&quot;basic&quot; Volume3d Area3d BaryCenterX BaryCenterY BaryCenterZ Mean}&#xa;&quot;Label Analysis(2)&quot; showAnalysis setValue 0 0&#xa;&quot;Label Analysis(2)&quot; showAnalysis setToggleVisible 0 1&#xa;&quot;Label Analysis(2)&quot; applyTransformToResult 1&#xa;&quot;Label Analysis(2)&quot; fire&#xa;&quot;Label Analysis(2)&quot; setViewerMask 16383&#xa;&quot;Label Analysis(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{87f49fe0-5fed-4df5-932f-506374bf844f}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{a4db3816-28fd-4e12-a9f5-cd585a52939e}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Reference Change(3)" resourceKey="HxISPReferenceModule" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Reference Change" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxISPReferenceModule &quot;Reference Change(3)&quot;&#xa;&quot;Reference Change(3)&quot; setIconPosition 0 0&#xa;&quot;Reference Change(3)&quot; setVar &quot;CustomHelp&quot; {HxISPReferenceModule}&#xa;&quot;Reference Change(3)&quot; data connect &quot;10_LabelAnalysis&quot;&#xa;&quot;Reference Change(3)&quot; fire&#xa;&quot;Reference Change(3)&quot; applyTransformToResult 1&#xa;&quot;Reference Change(3)&quot; fire&#xa;&quot;Reference Change(3)&quot; setViewerMask 16383&#xa;&quot;Reference Change(3)&quot; setPickable 1&#xa;&#xa;&quot;Reference Change(3)&quot; reference connect reference0" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput="reference"/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{c06aca6f-f37a-44b8-9386-102675365e95}"/>
+        <Connection resultSlot="0" name="reference" uid="{87f49fe0-5fed-4df5-932f-506374bf844f}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+      </Results>
+    </Step>
+    <Step uid="{087ceb3d-79e0-49b6-9222-cc81cc13a50b}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Sieve Analysis(2)" resourceKey="HxSieveAnalysis" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Sieve Analysis" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create HxSieveAnalysis &quot;Sieve Analysis(2)&quot;&#xa;&quot;Sieve Analysis(2)&quot; setVar &quot;CustomHelp&quot; {HxSieveAnalysis}&#xa;&quot;Sieve Analysis(2)&quot; setVar &quot;CustomXML&quot; {HxSieveAnalysis_config.xml}&#xa;&quot;Sieve Analysis(2)&quot; data connect &quot;9_Labeling&quot;&#xa;&quot;Sieve Analysis(2)&quot; labelAnalysis connect &quot;10_LabelAnalysis&quot;&#xa;&quot;Sieve Analysis(2)&quot; fire&#xa;&quot;Sieve Analysis(2)&quot; measure setIndex 0 0&#xa;&quot;Sieve Analysis(2)&quot; sieve setState {setSieves 1.407450 200.000000 }&#xa;&quot;Sieve Analysis(2)&quot; applyTransformToResult 1&#xa;&quot;Sieve Analysis(2)&quot; fire&#xa;&quot;Sieve Analysis(2)&quot; setViewerMask 16383&#xa;&quot;Sieve Analysis(2)&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="data" uid="{a4db3816-28fd-4e12-a9f5-cd585a52939e}"/>
+        <Connection resultSlot="0" name="labelAnalysis" uid="{c06aca6f-f37a-44b8-9386-102675365e95}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts>
+        <displayedPort label="Max Min vol3d sieve" defaultLabel="Sieve" name="sieve"/>
+      </displayedPorts>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{d74df951-4be9-433f-ba46-bc25148a2638}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Selective Dilation" resourceKey="selectivedilate2d" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Selective Dilation" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create selectivedilate2d &quot;Selective Dilation&quot;&#xa;&quot;Selective Dilation&quot; setVar &quot;CustomHelp&quot; {selectivedilate2d.html}&#xa;&quot;Selective Dilation&quot; setVar &quot;CustomXML&quot; {selectivedilate2d_config.xml}&#xa;&quot;Selective Dilation&quot; interpretation setValue 1&#xa;&quot;Selective Dilation&quot; outputLocation setIndex 0 0&#xa;&quot;Selective Dilation&quot; inputBinaryImage connect &quot;12_SieveAnalysis&quot;&#xa;&quot;Selective Dilation&quot; numberOfIterations setValue 0 10&#xa;&quot;Selective Dilation&quot; threshold setValue 0 5&#xa;&quot;Selective Dilation&quot; applyTransformToResult 1&#xa;&quot;Selective Dilation&quot; fire&#xa;&quot;Selective Dilation&quot; setViewerMask 16383&#xa;&quot;Selective Dilation&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputBinaryImage" uid="{087ceb3d-79e0-49b6-9222-cc81cc13a50b}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{89799591-39e2-430e-a6ed-c2361a32fa25}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Fill Holes" resourceKey="hole_fill2d" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Fill Holes" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create hole_fill2d &quot;Fill Holes&quot;&#xa;&quot;Fill Holes&quot; setIconPosition 800 247&#xa;&quot;Fill Holes&quot; setVar &quot;CustomHelp&quot; {hole_fill2d.html}&#xa;&quot;Fill Holes&quot; interpretation setValue 1&#xa;&quot;Fill Holes&quot; outputLocation setIndex 0 0&#xa;&quot;Fill Holes&quot; inputImage connect &quot;13_SelectiveDilation&quot;&#xa;&quot;Fill Holes&quot; neighborhoodConnectivity setIndex 0 0&#xa;&quot;Fill Holes&quot; applyTransformToResult 1&#xa;&quot;Fill Holes&quot; fire&#xa;&quot;Fill Holes&quot; setViewerMask 16383&#xa;&quot;Fill Holes&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputImage" uid="{d74df951-4be9-433f-ba46-bc25148a2638}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+    <Step uid="{9e26fd95-ee90-4665-b7c6-d64093335e1b}">
+      <CommonInfo room="" productName="" productVersion="2023.2" reuseRoom="0"/>
+      <ToolInfo label="Selective Opening" resourceKey="selectiveopening2d" action="MODULE_TOOL"/>
+      <StepInfo isResultSavedInRecordMode="0" isResultExportedInPool="0" name="Selective Opening" comment="" paused="0" areVolatile="0" outputName=""/>
+      <Action initCommands="create selectiveopening2d &quot;Selective Opening&quot;&#xa;&quot;Selective Opening&quot; setVar &quot;CustomHelp&quot; {selectiveopening2d.html}&#xa;&quot;Selective Opening&quot; setVar &quot;CustomXML&quot; {selectiveopening2d_config.xml}&#xa;&quot;Selective Opening&quot; interpretation setValue 1&#xa;&quot;Selective Opening&quot; outputLocation setIndex 0 0&#xa;&quot;Selective Opening&quot; inputBinaryImage connect &quot;14_FillHoles&quot;&#xa;&quot;Selective Opening&quot; numberOfIterations setValue 0 3&#xa;&quot;Selective Opening&quot; threshold setValue 0 2&#xa;&quot;Selective Opening&quot; applyTransformToResult 1&#xa;&quot;Selective Opening&quot; fire&#xa;&quot;Selective Opening&quot; setViewerMask 16383&#xa;&quot;Selective Opening&quot; setPickable 1&#xa;" isReproducible="1" canBePaused="1" applyCommands="" getResultCommands="" commandsNeedReplacement="1" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection resultSlot="-2" name="inputBinaryImage" uid="{89799591-39e2-430e-a6ed-c2361a32fa25}"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+      <outputs>
+        <output name="" slotId="0"/>
+      </outputs>
+    </Step>
+  </WorkflowStepsList>
+  <Documentation>
+    <Body></Body>
+  </Documentation>
+</Workflow>
