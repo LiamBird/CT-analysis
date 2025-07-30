@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Workflow mode="volume" name="Workflow">
+  <WorkflowStepsList>
+    <Step uid="{e4f0c2af-710f-4696-9d4f-7d217ad33e2c}">
+      <CommonInfo productName="" productVersion="2022.1"/>
+      <ToolInfo action="INPUT_STEP"/>
+      <StepInfo outputName="" name="" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+    </Step>
+    <Step uid="{d4c68c60-4d09-41de-bf05-82a70ea3e1bc}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="HxISPReferenceModule" label="Object(10)"/>
+      <StepInfo outputName="" name="Reference" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create HxISPReferenceModule &quot;Object(10)&quot;&#xa;&quot;Object(10)&quot; setIconPosition 0 0&#xa;&quot;Object(10)&quot; fire&#xa;&quot;Object(10)&quot; applyTransformToResult 1&#xa;&quot;Object(10)&quot; fire&#xa;&quot;Object(10)&quot; setViewerMask 16383&#xa;&quot;Object(10)&quot; setPickable 1&#xa;&quot;Object(10)&quot; data connect data-2&#xa;&quot;Object(10)&quot; reference connect reference-2&#xa;" getResultCommands="" modifyInput="reference"/>
+      <Parameters/>
+      <Connections>
+        <Connection name="data" uid="{e4f0c2af-710f-4696-9d4f-7d217ad33e2c}" resultSlot="-2"/>
+        <Connection name="reference" uid="{e4f0c2af-710f-4696-9d4f-7d217ad33e2c}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+      </Results>
+    </Step>
+    <Step uid="{17e0dfb2-c664-4229-8acd-9eec96f43661}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="HxISPThreshold" label="Thresholding"/>
+      <StepInfo outputName="" name="Thresholding" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create HxISPThreshold &quot;Thresholding&quot;&#xa;&quot;Thresholding&quot; setVar &quot;CustomHelp&quot; {HxISPThreshold}&#xa;&quot;Thresholding&quot; setVar &quot;CustomXML&quot; {HxISPThreshold_config.xml}&#xa;&quot;Thresholding&quot; data connect &quot;0_cathode_NLM.am&quot;&#xa;&quot;Thresholding&quot; fire&#xa;&quot;Thresholding&quot; intensityRange setValues 28710 65535&#xa;&quot;Thresholding&quot; intensityRange setButtons 0&#xa;&quot;Thresholding&quot; intensityRange setEditButton 1&#xa;&quot;Thresholding&quot; intensityRange setIncrement 4369&#xa;&quot;Thresholding&quot; intensityRange setSubMinMax 0 0&#xa;&quot;Thresholding&quot; applyTransformToResult 1&#xa;&quot;Thresholding&quot; fire&#xa;&quot;Thresholding&quot; setViewerMask 16383&#xa;&quot;Thresholding&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="data" uid="{d4c68c60-4d09-41de-bf05-82a70ea3e1bc}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{8e35f196-923a-4cc2-94a0-0b5c1ebe710a}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="ModuleGroup Erosion" label="Erosion(4)"/>
+      <StepInfo outputName="" name="Erosion" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create erode &quot;Erosion(4)&quot;&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomHelp&quot; {erode}&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomXML&quot; {erode_config.xml}&#xa;&quot;Erosion(4)&quot; Type setState {type Cube}&#xa;&quot;Erosion(4)&quot; interpretation setValue 0&#xa;&quot;Erosion(4)&quot; outputLocation setIndex 0 0&#xa;&quot;Erosion(4)&quot; neighborhood setValue 2&#xa;&quot;Erosion(4)&quot; inputImage connect &quot;2_Thresholding&quot;&#xa;&quot;Erosion(4)&quot; size setValue 0 2&#xa;&quot;Erosion(4)&quot; applyTransformToResult 1&#xa;&quot;Erosion(4)&quot; fire&#xa;&quot;Erosion(4)&quot; setViewerMask 16383&#xa;&quot;Erosion(4)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{17e0dfb2-c664-4229-8acd-9eec96f43661}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{01c278ef-335a-413d-a207-9348395cddd9}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="ModuleGroup Dilation" label="Dilation(2)"/>
+      <StepInfo outputName="" name="Dilation" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create dilate &quot;Dilation(2)&quot;&#xa;&quot;Dilation(2)&quot; setIconPosition 158 250&#xa;&quot;Dilation(2)&quot; setVar &quot;CustomHelp&quot; {dilate}&#xa;&quot;Dilation(2)&quot; Type setState {type Cube}&#xa;&quot;Dilation(2)&quot; interpretation setValue 0&#xa;&quot;Dilation(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Dilation(2)&quot; neighborhood setValue 2&#xa;&quot;Dilation(2)&quot; inputImage connect &quot;2_Thresholding&quot;&#xa;&quot;Dilation(2)&quot; size setMinMax 0 1 2147483648&#xa;&quot;Dilation(2)&quot; size setValue 0 10&#xa;&quot;Dilation(2)&quot; applyTransformToResult 1&#xa;&quot;Dilation(2)&quot; fire&#xa;&quot;Dilation(2)&quot; setViewerMask 16383&#xa;&quot;Dilation(2)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{8e35f196-923a-4cc2-94a0-0b5c1ebe710a}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{fcb184f4-a6a7-4b91-9460-585694b8808e}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="negative" label="Invert(2)"/>
+      <StepInfo outputName="" name="Invert" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create negative &quot;Invert(2)&quot;&#xa;&quot;Invert(2)&quot; setIconPosition 158 250&#xa;&quot;Invert(2)&quot; setVar &quot;CustomHelp&quot; {negative.html}&#xa;&quot;Invert(2)&quot; interpretation setValue 0&#xa;&quot;Invert(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Invert(2)&quot; inputImage connect &quot;3_Erosion&quot;&#xa;&quot;Invert(2)&quot; numberOfSignificantBits setMinMax 0 0 2147483648&#xa;&quot;Invert(2)&quot; numberOfSignificantBits setValue 0 1&#xa;&quot;Invert(2)&quot; applyTransformToResult 1&#xa;&quot;Invert(2)&quot; fire&#xa;&quot;Invert(2)&quot; setViewerMask 16383&#xa;&quot;Invert(2)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{01c278ef-335a-413d-a207-9348395cddd9}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{60489b95-ced9-4a2c-a3e6-5e78bfd021ea}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="ModuleGroup Erosion" label="Erosion(4)"/>
+      <StepInfo outputName="" name="Erosion" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create erode &quot;Erosion(4)&quot;&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomHelp&quot; {erode}&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomXML&quot; {erode_config.xml}&#xa;&quot;Erosion(4)&quot; Type setState {type Cube}&#xa;&quot;Erosion(4)&quot; interpretation setValue 0&#xa;&quot;Erosion(4)&quot; outputLocation setIndex 0 0&#xa;&quot;Erosion(4)&quot; neighborhood setValue 2&#xa;&quot;Erosion(4)&quot; inputImage connect &quot;5_Invert&quot;&#xa;&quot;Erosion(4)&quot; size setValue 0 10&#xa;&quot;Erosion(4)&quot; applyTransformToResult 1&#xa;&quot;Erosion(4)&quot; fire&#xa;&quot;Erosion(4)&quot; setViewerMask 16383&#xa;&quot;Erosion(4)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{fcb184f4-a6a7-4b91-9460-585694b8808e}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{b5ecdfde-23af-4a23-988b-1219b94c2970}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="HxISPReferenceModule" label="Reference Change"/>
+      <StepInfo outputName="" name="Reference Change" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create HxISPReferenceModule &quot;Reference Change&quot;&#xa;&quot;Reference Change&quot; setIconPosition 0 0&#xa;&quot;Reference Change&quot; setVar &quot;CustomHelp&quot; {HxISPReferenceModule}&#xa;&quot;Reference Change&quot; data connect &quot;6_Erosion&quot;&#xa;&quot;Reference Change&quot; fire&#xa;&quot;Reference Change&quot; applyTransformToResult 1&#xa;&quot;Reference Change&quot; fire&#xa;&quot;Reference Change&quot; setViewerMask 16383&#xa;&quot;Reference Change&quot; setPickable 1&#xa;&#xa;&quot;Reference Change&quot; reference connect reference0" getResultCommands="" modifyInput="reference"/>
+      <Parameters/>
+      <Connections>
+        <Connection name="data" uid="{60489b95-ced9-4a2c-a3e6-5e78bfd021ea}" resultSlot="-2"/>
+        <Connection name="reference" uid="{17e0dfb2-c664-4229-8acd-9eec96f43661}" resultSlot="0"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+      </Results>
+    </Step>
+    <Step uid="{9e9d1497-ebd6-4f72-8abc-214ff820fe60}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="mask" label="Mask(2)"/>
+      <StepInfo outputName="" name="Mask" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create mask &quot;Mask(2)&quot;&#xa;&quot;Mask(2)&quot; setVar &quot;CustomHelp&quot; {mask.html}&#xa;&quot;Mask(2)&quot; setVar &quot;CustomXML&quot; {mask_config.xml}&#xa;&quot;Mask(2)&quot; interpretation setValue 0&#xa;&quot;Mask(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Mask(2)&quot; inputImage connect &quot;2_Thresholding&quot;&#xa;&quot;Mask(2)&quot; inputBinaryImage connect &quot;6_Erosion&quot;&#xa;&quot;Mask(2)&quot; applyTransformToResult 1&#xa;&quot;Mask(2)&quot; fire&#xa;&quot;Mask(2)&quot; setViewerMask 16383&#xa;&quot;Mask(2)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputBinaryImage" uid="{60489b95-ced9-4a2c-a3e6-5e78bfd021ea}" resultSlot="0"/>
+        <Connection name="inputImage" uid="{b5ecdfde-23af-4a23-988b-1219b94c2970}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{3b871129-b4fa-4df1-a4fe-7aa5f8aeba08}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="ModuleGroup Closing" label="Closing(2)"/>
+      <StepInfo outputName="" name="Closing" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create diskclosing &quot;Closing(2)&quot;&#xa;&quot;Closing(2)&quot; setVar &quot;CustomHelp&quot; {diskclosing3d.html}&#xa;&quot;Closing(2)&quot; setVar &quot;CustomXML&quot; {diskclosing_config.xml}&#xa;&quot;Closing(2)&quot; Type setState {type Disc}&#xa;&quot;Closing(2)&quot; interpretation setValue 0&#xa;&quot;Closing(2)&quot; outputLocation setIndex 0 0&#xa;&quot;Closing(2)&quot; inputImage connect &quot;8_Mask&quot;&#xa;&quot;Closing(2)&quot; thetaAngle setValue 0 0&#xa;&quot;Closing(2)&quot; phiAngle setValue 0 0&#xa;&quot;Closing(2)&quot; size setValue 0 20&#xa;&quot;Closing(2)&quot; applyTransformToResult 1&#xa;&quot;Closing(2)&quot; fire&#xa;&quot;Closing(2)&quot; setViewerMask 16383&#xa;&quot;Closing(2)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{9e9d1497-ebd6-4f72-8abc-214ff820fe60}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+    <Step uid="{5a916c84-46f5-4df7-b338-858d0ccd7276}">
+      <CommonInfo productName="" reuseRoom="0" productVersion="2022.1" room=""/>
+      <ToolInfo action="MODULE_TOOL" resourceKey="ModuleGroup Erosion" label="Erosion(4)"/>
+      <StepInfo outputName="" name="Erosion" isResultExportedInPool="0" areVolatile="0" comment="" paused="0" isResultSavedInRecordMode="0"/>
+      <Action isReproducible="1" canBePaused="1" applyCommands="" commandsNeedReplacement="1" initCommands="create lerode &quot;Erosion(4)&quot;&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomHelp&quot; {lerode3d.html}&#xa;&quot;Erosion(4)&quot; setVar &quot;CustomXML&quot; {lerode_config.xml}&#xa;&quot;Erosion(4)&quot; Type setState {type Line}&#xa;&quot;Erosion(4)&quot; interpretation setValue 0&#xa;&quot;Erosion(4)&quot; outputLocation setIndex 0 0&#xa;&quot;Erosion(4)&quot; inputImage connect &quot;9_Closing&quot;&#xa;&quot;Erosion(4)&quot; thetaAngle setValue 0 0&#xa;&quot;Erosion(4)&quot; phiAngle setValue 0 0&#xa;&quot;Erosion(4)&quot; size setValue 0 5&#xa;&quot;Erosion(4)&quot; applyTransformToResult 1&#xa;&quot;Erosion(4)&quot; fire&#xa;&quot;Erosion(4)&quot; setViewerMask 16383&#xa;&quot;Erosion(4)&quot; setPickable 1&#xa;" getResultCommands="" modifyInput=""/>
+      <Parameters/>
+      <Connections>
+        <Connection name="inputImage" uid="{3b871129-b4fa-4df1-a4fe-7aa5f8aeba08}" resultSlot="-2"/>
+      </Connections>
+      <Results>
+        <Result resultSlot="-2"/>
+        <Result resultSlot="0"/>
+      </Results>
+      <displayedPorts/>
+      <filenamePorts/>
+    </Step>
+  </WorkflowStepsList>
+</Workflow>
