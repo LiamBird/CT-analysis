@@ -1,3 +1,5 @@
+
+
 class LabelAnalysis(object):  
     def __init__(self, fname, remove_blanks="Volume3d"):
         """
@@ -34,10 +36,11 @@ class LabelAnalysis(object):
         import numpy as np
         import matplotlib.pyplot as plt
 
-        self._version = "21.11.2024"
+        self._version = "12.11.2025"
         self._log = ["20.11.2024: fixed error on self.estimate_neighbourhood(fast_grid=False)",
                      "21.11.2024: added select_percentile_range function, added sieve_by_sphericity function",
-                     "14.07.2025: added remove_blanks option"]
+                     "14.07.2025: added remove_blanks option",
+                     "12.11.2025: added subsample function for estimate_neighbourhood"]
         
         self.df = pd.read_csv(fname, header=1)
         self.df.columns = [name.split(" ")[0] for name in self.df.columns]
@@ -279,7 +282,7 @@ class LabelAnalysis(object):
             
         self.distribution = _Dist()
         
-    def estimate_neighbourhood(self, fast_grid=True, n_grids=4):
+    def estimate_neighbourhood(self, subsample=False, fast_grid=True, n_grids=4, random_seed=42):
         """
         Estimates the distance from each particle to the nearest particle with larger volume
         
@@ -303,22 +306,54 @@ class LabelAnalysis(object):
         import matplotlib.pyplot as plt
         from tqdm import notebook
         
-        
-        def find_min_distance(df):
-            min_distance = []
+        def make_subsample(n_subsamples, max_value, min_value=0):
+            from random import randint
 
-            for idx in range(len(df)):
-                high_volume = df.loc[df["Volume3d"]>df["Volume3d"].iloc[idx]]
-                if len(high_volume) > 0:
-                    min_distance_data = high_volume.iloc[np.argmin(np.sqrt(np.sum([(high_volume[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]], axis=0)))]
-                    min_distance.append(np.sqrt(np.sum([(min_distance_data[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]])))
-                else:
-                    min_distance.append(np.nan)
+            subsample_idx = []
+
+            while len(subsample_idx) < n_subsamples:
+                new_value = randint(min_value, max_value)
+                if new_value not in subsample_idx:
+                    subsample_idx.append(new_value)
+            return subsample_idx
+        
+        ## Added 12/11/2025 for large datasets - subsamples instead of calculating for every particle
+        if subsample != False:
+            from random import seed
+            seed(random_seed)
+            subsample_idx = make_subsample(n_subsamples=subsample, max_value=len(self.df))
+            print(subsample_idx[:10])
+            fast_grid = False
+        
+        def find_min_distance(df, df_subsampled=None):
+            min_distance = []
+            
+            if type(df_subsampled) != type(None):
+                for idx in notebook.tqdm(range(len(df_subsampled))):
+                    high_volume = df.loc[df["Volume3d"]>df_subsampled["Volume3d"].iloc[idx]]
+                    if len(high_volume) > 0:
+                        min_distance_data = high_volume.iloc[np.argmin(np.sqrt(np.sum([(high_volume[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]], axis=0)))]
+                        min_distance.append(np.sqrt(np.sum([(min_distance_data[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]])))
+                    else:
+                        min_distance.append(np.nan)
+                        
+            else:
+                for idx in range(len(df)):
+                    high_volume = df.loc[df["Volume3d"]>df["Volume3d"].iloc[idx]]
+                    if len(high_volume) > 0:
+                        min_distance_data = high_volume.iloc[np.argmin(np.sqrt(np.sum([(high_volume[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]], axis=0)))]
+                        min_distance.append(np.sqrt(np.sum([(min_distance_data[xyz]-df[xyz].iloc[idx])**2 for xyz in ["BaryCenterX", "BaryCenterY", "BaryCenterZ"]])))
+                    else:
+                        min_distance.append(np.nan)
             return min_distance
         
         
         if fast_grid == False:
-            return self.df["EqDiameter"].to_numpy(), np.array(find_min_distance(self.df))
+            if subsample == False:
+                return self.df["EqDiameter"].to_numpy(), np.array(find_min_distance(df=self.df))
+            else:
+                return self.df["EqDiameter"].to_numpy()[subsample_idx], np.array(find_min_distance(df=self.df,
+                                                                                   df_subsampled=self.df.iloc[subsample_idx]))
 
         else:
             lateral_dimensions = self._lateral_dimensions
